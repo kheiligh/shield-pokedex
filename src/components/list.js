@@ -16,6 +16,7 @@ const styles = {
       display: 'inline-block',
       height: 135,
       width: 185,
+      marginLeft: 10,
       backgroundColor: '#FFF8DE',
       marginBottom: 10
     },
