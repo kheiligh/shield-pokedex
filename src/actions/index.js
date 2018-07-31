@@ -1,4 +1,4 @@
-import { ADD_POKEMON, SET_RESULTS } from '../constants';
+import { ADD_POKEMON, SET_RESULTS, SET_DETAILS } from '../constants';
 import Axios from 'axios';
 // export const addPokemon = pokemon => ({ type: ADD_POKEMON, payload: pokemon});
 export function getPokemonList(dispatch) {
@@ -17,6 +17,20 @@ export function getPokemonList(dispatch) {
             dispatch({
                 type: ADD_POKEMON,
                 payload: values
+            });
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+}
+
+export function getPokemonDetails(pokeId) {
+    return dispatch => {
+        Axios.get('https://pokeapi.co/api/v2/pokemon/' + pokeId + '/').then(function(resp) {
+            
+            dispatch({
+                type: SET_DETAILS,
+                payload: resp.data
             });
         }).catch(error => {
             console.log(error);

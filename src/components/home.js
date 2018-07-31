@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import List from './list';
 import Form from './form';
 import { getPokemonList } from '../actions';
+
 function mapStateToProps(state) {  
     return {
         pokemon: state.pokemon,

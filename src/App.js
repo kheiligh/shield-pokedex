@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import HomeComponent from './components/home';
+import ModalSwitch from './components/modal.switch';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <HomeComponent></HomeComponent>
-      </div>
+      <Router>
+        <Route component={ModalSwitch} />
+      </Router>
     );
   }
 }

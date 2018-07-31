@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Link } from "react-router-dom";
 
 const styles = {
     list_container: {
@@ -42,10 +43,14 @@ function List(props) {
                 </CardContent>
                 <CardActions>
                     <Button size="small" color="primary">
+                        <Link key={x.id} to={{pathname: `/poke/${x.id}`, state: { modal: false } }}>
                         Share
+                        </Link>
                     </Button>
                     <Button size="small" color="primary">
-                        Learn More
+                        <Link key={x.id} to={{pathname: `/poke/${x.id}`, state: { modal: true } }}>
+                            Learn More 
+                        </Link>
                     </Button>
                 </CardActions>
             </Card>
