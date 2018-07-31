@@ -1,4 +1,4 @@
-import { ADD_POKEMON, SET_RESULTS, SET_DETAILS } from '../constants';
+import { ADD_POKEMON, CLEAR_DETAILS, SET_RESULTS, SET_DETAILS } from '../constants';
 
 const initialState = {
     pokemon: [],
@@ -14,6 +14,8 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, searchResults: action.payload }
         case SET_DETAILS:
             return { ...state, pokemonDetails: action.payload }
+        case CLEAR_DETAILS: 
+            return { ...state, pokemonDetails: null }
         default:
             return state;
     }

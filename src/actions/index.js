@@ -1,4 +1,4 @@
-import { ADD_POKEMON, SET_RESULTS, SET_DETAILS } from '../constants';
+import { ADD_POKEMON, SET_RESULTS, SET_DETAILS, CLEAR_DETAILS } from '../constants';
 import Axios from 'axios';
 // export const addPokemon = pokemon => ({ type: ADD_POKEMON, payload: pokemon});
 export function getPokemonList(dispatch) {
@@ -19,7 +19,7 @@ export function getPokemonList(dispatch) {
                 payload: values
             });
         }).catch(error => {
-            console.log(error);
+            alert('Services failure getting full list: ' + error);
         });
     }
 }
@@ -33,7 +33,16 @@ export function getPokemonDetails(pokeId) {
                 payload: resp.data
             });
         }).catch(error => {
-            console.log(error);
+            alert('Services failure getting details: ' + error);
+        });
+    }
+}
+
+export function clearDetails() {
+    return dispatch => {
+    dispatch({
+        type: CLEAR_DETAILS,
+        payload: null
         });
     }
 }

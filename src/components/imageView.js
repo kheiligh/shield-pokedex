@@ -18,17 +18,23 @@ class ImageView extends Component {
             const pokemon = this.props.pokemondetails;
             // name, picture, height, weight, type, and most common ability/move.
             return (
-                <div>
-                    <img src={pokemon.sprites.front_default} alt='{pokemon.id}' />
-                    <p>Name: {pokemon.name}</p>
-                    <p>Weight: {pokemon.weight}</p>
-                    <p>
-                        Type: 
-                        {pokemon.types.map(type => 
-                            <span key={type.slot}>{type.type.name}</span>
-                        )}
-                    </p>
-                    
+                <div className="detail_container">
+                    <div className='pokemon_details'>
+                        <img src={pokemon.sprites.front_default} alt='{pokemon.id}' />
+                        <div className='pokemon_title'>
+                            {pokemon.name}
+                            <div className='pokemon_types'>
+                            {pokemon.types.map(type => 
+                                <span key={type.slot} className={type.type.name}> {type.type.name} </span>
+                            )}
+                            </div>
+                        </div>
+                        <p><b>Weight: </b> {pokemon.weight} lbs.</p>
+                        <p><b>Height: </b> {pokemon.height} M</p>
+                        <p><b>Common Moves: </b> 
+                            {pokemon.moves[0].move.name}
+                        </p>
+                    </div>
                 </div>
             );
         } else {

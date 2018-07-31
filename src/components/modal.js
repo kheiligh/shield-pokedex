@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPokemonDetails } from '../actions';
+import { clearDetails, getPokemonDetails } from '../actions';
 
 function mapStateToProps(state) {  
     return {
@@ -11,54 +11,50 @@ function mapStateToProps(state) {
 class Modal extends Component {
     constructor(props) {
         super(props)
-        this.handleBackClick = this.goBack.bind(this);
+        this.handleCloseClick = this.goBack.bind(this);
+        this.handleBackGroundClick = this.handleBackGroundClick.bind(this);
     }
     
     componentDidMount() {
         this.props.getPokemonDetails(this.props.match.params.id);
     }
 
+    componentWillUnmount() {
+        this.props.clearDetails();
+    }
+
     goBack(event) {
+        this.setState( { pokemondetails: null });
         this.props.history.goBack();
+    }
+    handleBackGroundClick(event) {
+        this.setState( { pokemondetails: null });
+        if(event.target === event.currentTarget) this.props.history.goBack();
     }
     render() {
         if (this.props.pokemondetails) {
             const pokemon = this.props.pokemondetails;
             // name, picture, height, weight, type, and most common ability/move.
             return (
-                <div
-                    onClick={this.handleBackClick}
-                    style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    bottom: 0,
-                    right: 0,
-                    background: "rgba(0, 0, 0, 0.15)"
-                    }}
-                >
-                    <div
-                        className="modal"
-                        style={{
-                        position: "absolute",
-                        background: "#fff",
-                        top: 25,
-                        left: "10%",
-                        right: "10%",
-                        padding: 15,
-                        border: "2px solid #444"
-                        }}
-                    >
-                        <img src={pokemon.sprites.front_default} alt='{pokemon.id}' />
-                        <p>Name: {pokemon.name}</p>
-                        <p>Weight: {pokemon.weight}</p>
-                        <p>
-                            Type: 
-                            {pokemon.types.map(type => 
-                                <span key={type.slot}>{type.type.name}</span>
-                            )}
-                        </p>
-                        <button type="button">Close</button>                        
+                <div className='modal_cover' onClick={this.handleBackGroundClick}>
+                    <div className='modal'>
+                        <div className='close_modal' onClick={this.handleCloseClick}>X</div>
+                        <div className='modal_content'>
+                            <img src={pokemon.sprites.front_default} alt='{pokemon.id}' />
+                            <div className='modal_title'>
+                                {pokemon.name}
+                                <div className='pokemon_types'>
+                                {pokemon.types.map(type => 
+                                    <span key={type.slot} className={type.type.name}> {type.type.name} </span>
+                                )}
+                                </div>
+                            </div>
+                            <p><b>Weight: </b> {pokemon.weight} lbs.</p>
+                            <p><b>Height: </b> {pokemon.height} M</p>
+                            <p><b>Common Moves: </b> 
+                                {pokemon.moves[0].move.name}
+                            </p>
+                        </div>
                     </div>
                 </div>
             );
@@ -69,4 +65,4 @@ class Modal extends Component {
         }
     }
 }
-export default connect(mapStateToProps, { getPokemonDetails })(Modal);
+export default connect(mapStateToProps, { getPokemonDetails, clearDetails })(Modal);

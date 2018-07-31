@@ -19,7 +19,7 @@ class HomeComponent extends Component {
     
     render() {
       return (
-        <div>
+        <div id="home">
             <div>
                 <h2>Searchable Pokemon Index</h2><br/>
                 <Form pokemon={this.props.pokemon} />
