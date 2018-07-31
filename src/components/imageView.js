@@ -39,7 +39,7 @@ class ImageView extends Component {
             );
         } else {
             return (
-                <div></div>
+                <div className='detail_container loading'>Loading ... </div>
             )
         }
     }

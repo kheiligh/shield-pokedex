@@ -127,6 +127,10 @@ body {
 .detail_container {
   padding: 30px 0;
 }
+.detail_container.loading {
+  text-align: center;
+  font-size: 15px;
+}
 .pokemon_details {
   color: #817A70;
   width: 50%;
